@@ -17,13 +17,17 @@ const AddTask = ({ tasks, setTasks }) => {
   // task posting
   //use "text"
   const taskPosting = async (text) => {
-    const res = fetch("https://knowing-necessary-feta.glitch.me/tasks", {
+    const res = await fetch("https://knowing-necessary-feta.glitch.me/tasks", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify({ text }),
     });
+
+    const data = await res.json();
+    // real-time data updation
+    setTasks([...tasks, data]);
   };
 
   // use "text"
